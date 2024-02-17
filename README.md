@@ -1,3 +1,15 @@
+这个项目是B站三木图书馆的一个项目，原本是ts做的，我将它用js复刻了一遍，其中特别要注意的是这个项目使用的是页面路由，现在最新使用的是应用路由，而本人第一次敲的时候，没有将原作者的package.json复制下来，选择了自己安装，但是运行的时候，antd库报了SyntaxError: Cannot use import statement outside a module这个错误，耗费了大量时间去配置启动文件以及动态导入等等仍然没有解决。
+
+然后本人用create-next-app就单纯创建了两个项目，其中一个使用的是应用路由，另外一个使用的是页面路由，然后试着用es6模块，（比如import {}引入，export导出这种）引入自己写的组件，发现都没有问题啊，然后引入antd库，页面路由的报错了，但是应用路由没问题。
+
+最后一想，不会它喵的是库的版本问题吧，于是尝试着将next.js和antd分别降级，最后发现当next.js从最新的14降到了原作者写的时候的13之后，就没报错了
+
+引以为鉴啊~引以为鉴。。
+
+所以如果失败了，可以使用我的package.json
+
+另外原作者的登录鉴权部分没写好，没有首页的重定向，还有首页删掉了index.js，布局有点小问题，（无冒犯之意哦，只是自己的标注）后面有空我再改改。
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
