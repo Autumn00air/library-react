@@ -87,7 +87,7 @@ export default function Borrow() {
     const [categoryList, setCategoryList] = useState([]);
     const [bookList, setBookList] = useState([]);
     const [total, setTotal] = useState(0);
-    const [pagination, setPagination] = useState < TablePaginationConfig > ({
+    const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 20,
         showSizeChanger: true,

@@ -83,7 +83,7 @@ export default function Book() {
         pageSize: 20,
         showSizeChanger: true,
     });
-    const [editData, setEditData] = useState < Partial < CategoryType >> ({});
+    const [editData, setEditData] = useState({});
 
     const columns = [
         ...COLUMNS,

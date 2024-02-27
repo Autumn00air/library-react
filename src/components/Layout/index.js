@@ -149,13 +149,13 @@ const Layout = ({ children, title = "图书列表", operation }) => {
                 <AntdLayout className={styles.container}>
                     <Header className={styles.header}>
                         {/* 下面这张图片是logo，这个图片是在public文件夹下的 */}
-                        <Image
+                        {/* <Image
                             src="/logo.svg"
                             width={30}
                             height={30}
                             alt="logo"
                             className={styles.logo}
-                        />
+                        /> */}
                         图书管理系统
                         <span className={styles.user}>
                             <Dropdown menu={{ items: USER_ITEMS }} placement="bottom">

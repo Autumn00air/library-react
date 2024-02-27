@@ -77,7 +77,7 @@ export default function Book() {
         pageSize: 20,
         showSizeChanger: true,
     });
-    const [editData, setEditData] = useState < Partial < BookType >> ({});
+    const [editData, setEditData] = useState({});
     const router = useRouter();
 
     const columns = [
