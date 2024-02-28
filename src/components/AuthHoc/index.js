@@ -1,6 +1,5 @@
 import { USER_ROLE } from "@/constants";
 import { useCurrentUser } from "@/utils/hoos";
-import { PropsWithChildren, cloneElement } from "react";
 
 //这是个高阶组件，用于控制只有管理员才能看到的UI部分
 const AuthHoc = ({ children }) => {

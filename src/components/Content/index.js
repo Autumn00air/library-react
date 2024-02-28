@@ -1,5 +1,3 @@
-import { PropsWithChildren, ReactNode } from "react";
-
 import styles from "./index.module.css";
 
 const Content = ({ children, operation, title }) => {

@@ -18,6 +18,13 @@ export const CreateAxiosInstance = (config) => {
         function (config) {
             //如果本地存储能够取到用户信息user，就将user._id添加到请求头中，否则添加了个空的字符串作为userToken
             const user = JSON.parse(localStorage.getItem("user") || "{}");
+            //如果本地没有user而且这也不是login中提交的请求的话，就重定向到登录页面
+            if (Object.keys(user).length === 0 && config.url !== "/api/login") {
+
+                console.log('%c [  ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', 2)
+                // return Router.push("/login");
+                Router.push("/login");
+            }
             config.headers = {
                 userToken: user?._id,
             };
