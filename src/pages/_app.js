@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }) {
           {router.pathname === "/login" ? (
             <Component {...pageProps} />
           ) : (
-            // 这个layout是我们写的一个功能组件,主要用于验证用户是否登录,如果登录了,就显示页面,如果没有登录,就跳转到登录页面,另一个验证用户过期的地方是我们的api请求,如果用户过期,就会返回401,我们在api请求的地方做了拦截,如果返回401,就会跳转到登录页面
+            //这里相当于app路由里的layou.js
             <Layout>
               <Component {...pageProps} />
             </Layout>

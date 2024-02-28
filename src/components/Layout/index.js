@@ -89,6 +89,10 @@ const ITEMS = [
     },
 ];
 
+console.log('%c [  ]-92', 'font-size:13px; background:pink; color:#bf2c9f;', "hasbeen on")
+//上面这部分是组件挂载的时候会走一遍，下面这个是重新渲染就会走一遍，除了useEffect中的，至于会不会
+//重新渲染，是看有没有props,state发生改变
+
 const Layout = ({ children, title = "图书列表", operation }) => {
     const router = useRouter();
     const user = useCurrentUser();

@@ -71,14 +71,14 @@ const BookForm = ({ title, editData }) => {
     const handlePreview = () => {
         setPreview(form.getFieldValue("cover"));
     };
-
-    {
-        categoryList?.map((category) => (
-            <Option value={category._id} key={category._id}>
-                {category.name}
-            </Option>
-        ));
-    }
+    //没意义啊，下面这段代码，不在return中是渲染不成jsx的
+    // {
+    //     categoryList?.map((category) => (
+    //         <Option value={category._id} key={category._id}>
+    //             {category.name}
+    //         </Option>
+    //     ));
+    // }
 
     return (
         <>
