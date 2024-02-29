@@ -94,6 +94,7 @@ const COLUMNS = [
         key: "createdAt",
         width: 130,
         render: (text) => dayjs(text).format("YYYY-MM-DD"),
+        // render: (text) => text,
     },
 ];
 
@@ -155,6 +156,7 @@ export default function Book() {
                 category,
                 author,
             }).then((res) => {
+                console.log('%c [  ]-159', 'font-size:13px; background:pink; color:#bf2c9f;', res.data)
                 setList(res.data);
                 setTotal(res.total);
             });
@@ -170,6 +172,8 @@ export default function Book() {
         (async function () {
             getCategoryList({ all: true }).then((res) => {
                 setCategoryList(res.data);
+
+                console.log('%c [  ]-175', 'font-size:13px; background:pink; color:#bf2c9f;', res.data)
             });
         })();
     }, []);

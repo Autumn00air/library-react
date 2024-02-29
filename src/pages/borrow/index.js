@@ -152,12 +152,16 @@ export default function Borrow() {
                 user,
                 status,
             }).then((res) => {
+
+                // console.log('%c [  ]-156', 'font-size:13px; background:pink; color:#bf2c9f;', res.data)
                 const data = res.data.map((item) => ({
                     ...item,
                     bookName: item.book.name,
                     author: item.book.author,
                     borrowUser: item.user.nickName,
                 }));
+
+                // console.log('%c [  ]-162', 'font-size:13px; background:pink; color:#bf2c9f;', data)
                 setList(data);
                 setTotal(res.total);
             });
@@ -289,6 +293,8 @@ export default function Borrow() {
                     pagination={{
                         ...pagination,
                         total: total,
+                        // pageSizeOptions: ['20', '30', '40'],
+                        // showSizeChanger: true,
                         showTotal: () => `共 ${total} 条`,
                     }}
                 />

@@ -9,6 +9,8 @@ export default function Book() {
     useEffect(() => {
         (async () => {
             const res = await getBookDetail(router.query.id);
+
+            // console.log('%c [  ]-13', 'font-size:13px; background:pink; color:#bf2c9f;', res.data)
             setData(res.data);
         })();
     }, [router]);

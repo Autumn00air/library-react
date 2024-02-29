@@ -38,13 +38,13 @@ export default function Login() {
             </Head>
             <main className={styles.main}>
                 <header className={styles.header}>
-                    <Image
+                    {/* <Image
                         className={styles.img}
                         width={100}
                         height={100}
                         src="/logo.svg"
                         alt="logo"
-                    />
+                    /> */}
                     图书管理系统
                 </header>
                 <div className={styles.form}>
