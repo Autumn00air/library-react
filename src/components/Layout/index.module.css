@@ -2,6 +2,7 @@
     height: 100%;
 }
 
+/* 主要还是设置各个元素的高为100%，来撑满高度，至于宽度，自然会撑开的 */
 .header {
     font-size: 20px;
     font-weight: bold;

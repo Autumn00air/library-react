@@ -2,7 +2,7 @@ import { getUserList, userDelete, userUpdate } from "@/api";
 import { Content } from "@/components";
 import { USER_STATUS } from "@/constants";
 
-import { useCurrentUser } from "@/utils/hoos";
+import { useCurrentUser } from "@/utils/usehooks";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import {
     Button,
@@ -14,7 +14,6 @@ import {
     Select,
     Space,
     Table,
-    TablePaginationConfig,
     Tag,
     message,
 } from "antd";
@@ -26,11 +25,12 @@ import styles from "./index.module.css";
 
 const Option = Select.Option;
 
+// 一个table只需要两个属性  一个datasource  一个columns  都是数组
 const COLUMNS = [
     {
         title: "账号",
-        dataIndex: "name",
-        key: "name",
+        dataIndex: "name",   //这个是datasource中对应每一行数据的每个属性的属性名， 也就是数据中的对应key
+        key: "name",  //设置了上面这个dataIndex，这个就可以不设置了
         ellipsis: true,
         width: 200,
     },
@@ -47,7 +47,7 @@ const COLUMNS = [
         key: "status",
         ellipsis: true,
         width: 150,
-        render: (text) =>
+        render: (text) =>  //生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引。这里当前行的值指的是datasource中的key对应dataIndex的值，也就是这一列对应的这一行的值，而当前行数据指的是这一行的所有数据，行索引就是这一行的索引
             text === "on" ? (
                 <Tag color="green">正常</Tag>
             ) : (
@@ -60,17 +60,17 @@ const COLUMNS = [
         key: "createdAt",
         width: 200,
         render: (text) => {
-            return dayjs(text).format("YYYY-MM-DD");
+            return dayjs(text).format("YYYY-MM-DD");  //这里用了dayjs这个库来格式化时间，这个库非常滴nice
         },
     },
 ];
 
 export default function Book() {
     const [form] = Form.useForm();
-    const user = useCurrentUser();
+    // const user = useCurrentUser();
     const [list, setList] = useState([]);
 
-    const [categoryList, setCategoryList] = useState([]);
+    // const [categoryList, setCategoryList] = useState([]);
     const [total, setTotal] = useState(0);
     const [pagination, setPagination] = useState({
         current: 1,
@@ -129,6 +129,8 @@ export default function Book() {
                 ...(name && { name }),
                 ...(status && { status }),
             }).then((res) => {
+
+                console.log('%c [  ]-133', 'font-size:13px; background:pink; color:#bf2c9f;', res.data)
                 setList(res.data);
                 setTotal(res.total);
             });
@@ -224,6 +226,7 @@ export default function Book() {
                     </Row>
                 </Form>
                 <div className={styles.tableWrap}>
+                    {/* 养成一个意识：数据库的数据一般都会有个_id标识，而前端组件中很多会要求有个key属性，有时候用这个数据库来的_id可以很方便的作为key */}
                     <Table
                         rowKey="_id"
                         dataSource={list}

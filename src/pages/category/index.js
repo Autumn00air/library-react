@@ -73,6 +73,7 @@ const COLUMNS = [
 
 export default function Book() {
     const [form] = Form.useForm();
+    //这是modal的另一种用法，还有一种简便的的在user那个主页有
     const [isModalOpen, setModalOpen] = useState(false);
     const [list, setList] = useState([]);
     const [total, setTotal] = useState(0);
@@ -121,6 +122,8 @@ export default function Book() {
 
     const fetchData = useCallback(
         (search) => {
+
+            console.log('%c [  ]-126', 'font-size:13px; background:pink; color:#bf2c9f;', search)
             const { name, level } = search || {};
 
             request

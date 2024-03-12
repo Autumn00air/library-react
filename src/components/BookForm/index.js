@@ -13,7 +13,7 @@ import {
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Content from "../Content";
 import styles from "./index.module.css";
@@ -43,6 +43,8 @@ const BookForm = ({ title, editData }) => {
                 category: editData.category ? editData.category._id : undefined,
                 publishAt: editData.publishAt ? dayjs(editData.publishAt) : undefined,
             };
+
+            console.log('%c [  ]-47', 'font-size:13px; background:pink; color:#bf2c9f;', editData)
             setCover(editData.cover);
             form.setFieldsValue(data);
         }

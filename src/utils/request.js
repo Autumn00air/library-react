@@ -1,4 +1,3 @@
-import { useCurrentUser } from "@/utils/hoos";
 import { message as AntdMessage } from "antd";
 import axios from "axios";
 import Router from "next/router";
@@ -9,8 +8,8 @@ import Router from "next/router";
 export const CreateAxiosInstance = (config) => {
     //创建axios实例，withCredentials: 设置为 true，表示跨域请求时是否需要使用凭证。如果 withCredentials 为 true，那么请求会带上例如 cookies 的凭证信息。
     const instance = axios.create({
-        timeout: 5000,
-        withCredentials: true,
+        timeout: 5000,  //5秒超时
+        withCredentials: true,     //带cookie
         ...config,
     });
     //添加实例的请求拦截器

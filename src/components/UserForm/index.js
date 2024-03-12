@@ -1,10 +1,10 @@
 import { userAdd, userUpdate } from "@/api";
 import { Content } from "@/components";
 import { USER_ROLE, USER_SEX, USER_STATUS } from "@/constants";
-import { useCurrentUser } from "@/utils/hoos";
+import { useCurrentUser } from "@/utils/usehooks";
 import { Button, Form, Input, Radio, message } from "antd";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import styles from "./index.module.css";
 

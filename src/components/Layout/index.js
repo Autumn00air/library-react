@@ -1,6 +1,6 @@
 import { setLogout } from "@/api";
 import { USER_ROLE } from "@/constants";
-import { useCurrentUser } from "@/utils/hoos";
+import { useCurrentUser } from "@/utils/usehooks";
 import { DownOutlined } from "@ant-design/icons";
 import {
     ProfileOutlined,
@@ -12,7 +12,6 @@ import {
     Layout as AntdLayout,
     Dropdown,
     Menu,
-    MenuProps,
     Space,
     message,
 } from "antd";
@@ -20,7 +19,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { PropsWithChildren, ReactElement, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import styles from "./index.module.css";
 
@@ -93,16 +92,20 @@ console.log('%c [  ]-92', 'font-size:13px; background:pink; color:#bf2c9f;', "ha
 //上面这部分是组件挂载的时候会走一遍，下面这个是重新渲染就会走一遍，除了useEffect中的，至于会不会
 //重新渲染，是看有没有props,state发生改变
 
-const Layout = ({ children, title = "图书列表", operation }) => {
+const Layout = ({ children }) => {
     const router = useRouter();
     const user = useCurrentUser();
 
     const activeMenu = router.pathname;
     const defaultOpenKeys = [activeMenu.split("/")[1]];
 
+    console.log('%c [  ]-102', 'font-size:13px; background:pink; color:#bf2c9f;', activeMenu)
     const handleChangeMenu = (e) => {
         router.push(e.key);
     };
+    // function handleChangeMenu(e) {
+    //     console.log(e);
+    // }
 
     const USER_ITEMS = [
         {
@@ -125,7 +128,8 @@ const Layout = ({ children, title = "图书列表", operation }) => {
             ),
         },
     ];
-
+    //针对管理员和普通用户的菜单进行过滤，
+    //而且还用了useMemo，useMemo是一个hook，用来缓存计算结果，只有当依赖项发生变化时，才会重新计算
     const items = useMemo(() => {
         if (user?.role === USER_ROLE.USER) {
             return ITEMS.filter((item) => {
@@ -140,7 +144,7 @@ const Layout = ({ children, title = "图书列表", operation }) => {
             return ITEMS;
         }
     }, [user]);
-
+    //这种HEAD组件在pages路由才有，最新的app路由已经将这个写法改成了元数据metadata导出了
     return (
         <>
             <Head>
@@ -149,6 +153,7 @@ const Layout = ({ children, title = "图书列表", operation }) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            {/* 而且也不建议在这里写网页信息，应该写在_app.js中 */}
             <main className={styles.main}>
                 <AntdLayout className={styles.container}>
                     <Header className={styles.header}>

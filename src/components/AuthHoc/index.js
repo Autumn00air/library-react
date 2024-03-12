@@ -1,12 +1,21 @@
 import { USER_ROLE } from "@/constants";
-import { useCurrentUser } from "@/utils/hoos";
+import { useCurrentUser } from "@/utils/usehooks";
 
 //这是个高阶组件，用于控制只有管理员才能看到的UI部分
+//严格来说，这个高阶组件并不是一个真正的高阶组件，因为它并没有返回一个新的组件，而是根据条件渲染了不同的内容，更像是一个插槽
+//但是它的作用和高阶组件是一样的，所以我们也把它称为高阶组件；真正的高阶组件的参数应该是直接一个cop
 const AuthHoc = ({ children }) => {
     const user = useCurrentUser();
     return user?.role === USER_ROLE.ADMIN ? <>{children}</> : null;
 };
 export default AuthHoc;
+//应该是这样写
+// export default function withAuth(Component) {
+//     return function AuthHoc(props) {
+//         const user = useCurrentUser();
+//         return user?.role === USER_ROLE.ADMIN ? <Component {...props} /> : null;
+//     };
+// }
 
 // 这段代码定义了一个名为 AuthHoc 的高阶组件（Higher-Order Component，HOC）。在 React 中，高阶组件是一种用于重用组件逻辑的高级技术。具体来说，高阶组件是参数为组件，返回值为新组件的函数。
 
