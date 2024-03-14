@@ -7,12 +7,18 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import styles from "./index.module.css";
+import axios from "axios";
 
 export default function Login() {
     const router = useRouter();
     const onFinish = async (values) => {
         try {
-            const res = await request.post("/api/login", values);
+            //这是个单独的axios请求，不是走的request实例
+            // const res = await request.post("/api/login", values);
+            const res = await axios.post("/api/login",
+                values,
+                { withCredentials: false }
+            );
             console.log(
                 "%c [ res ]-17",
                 "font-size:13px; background:pink; color:#bf2c9f;",
@@ -20,9 +26,9 @@ export default function Login() {
             );
             localStorage.setItem("user", JSON.stringify(res.data));
             message.success("登陆成功");
-
             router.push("/book");
         } catch (error) {
+            message.success("登录失败");
             console.error(error);
         }
     };

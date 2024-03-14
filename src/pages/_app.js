@@ -24,7 +24,18 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   const [load, setLoad] = useState(false);
+  //#todo路由守卫这里还少了一个环节就是假如用户私自更改了cookie或者localstorage中的user怎么办
+  // useEffect(() => {
+  //   async function testuser() {
+  //     try {
+  //       const res = await axios.get("/api/login", { withCredentials: true })
+  //       //  localStorage.setItem("user", JSON.stringify(res.data));
+  //     } catch (e) {
 
+  //     }
+  //   }
+  //   testuser()
+  // }, [])
   useEffect(() => {
     setLoad(true);
   }, []);

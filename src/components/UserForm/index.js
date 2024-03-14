@@ -102,13 +102,13 @@ const UserForm = ({
                         <Input.Password placeholder="请输入" type="password" />
                     </Form.Item>
                     <Form.Item label="状态" name="status">
-                        <Radio.Group disabled={user?.role === USER_ROLE.USER}>
+                        <Radio.Group disabled={user?.data.role === USER_ROLE.USER}>
                             <Radio value="on">启用</Radio>
                             <Radio value="off">禁用</Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item label="角色" name="role">
-                        <Radio.Group disabled={user?.role === USER_ROLE.USER}>
+                        <Radio.Group disabled={user?.data.role === USER_ROLE.USER}>
                             <Radio value="user">用户</Radio>
                             <Radio value="admin">管理员</Radio>
                         </Radio.Group>

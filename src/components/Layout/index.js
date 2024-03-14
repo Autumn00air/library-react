@@ -19,7 +19,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import styles from "./index.module.css";
 
@@ -93,9 +93,21 @@ console.log('%c [  ]-92', 'font-size:13px; background:pink; color:#bf2c9f;', "ha
 //重新渲染，是看有没有props,state发生改变
 
 const Layout = ({ children }) => {
+    // const [user,setUser] = useState({})
     const router = useRouter();
     const user = useCurrentUser();
 
+    console.log('%c [  ]-100', 'font-size:13px; background:pink; color:#bf2c9f;', user)
+
+    console.log('%c [  ]-102', 'font-size:13px; background:pink; color:#bf2c9f;', 2222)
+    // useEffect(() => {
+    //     console.log('%c [  ]-99', 'font-size:13px; background:pink; color:#bf2c9f;', user)
+    //     if (!user) {
+    //         console.log("莫名奇妙")
+    //         router.push("/login")
+    //     }
+
+    // }, [user, router]);
     const activeMenu = router.pathname;
     const defaultOpenKeys = [activeMenu.split("/")[1]];
 
@@ -110,7 +122,7 @@ const Layout = ({ children }) => {
     const USER_ITEMS = [
         {
             key: "1",
-            label: <Link href={`/user/edit/${user?._id}`}>个人中心</Link>,
+            label: <Link href={`/user/edit/${user?.data._id}`}>个人中心</Link>,
         },
         {
             key: "2",
@@ -131,7 +143,7 @@ const Layout = ({ children }) => {
     //针对管理员和普通用户的菜单进行过滤，
     //而且还用了useMemo，useMemo是一个hook，用来缓存计算结果，只有当依赖项发生变化时，才会重新计算
     const items = useMemo(() => {
-        if (user?.role === USER_ROLE.USER) {
+        if (user?.data.role === USER_ROLE.USER) {
             return ITEMS.filter((item) => {
                 if (item.children) {
                     item.children = item.children.filter(
@@ -170,7 +182,7 @@ const Layout = ({ children }) => {
                             <Dropdown menu={{ items: USER_ITEMS }} placement="bottom">
                                 <span onClick={(e) => e.preventDefault()}>
                                     <Space>
-                                        {user?.nickName}
+                                        {user?.data.nickName}
                                         <DownOutlined />
                                     </Space>
                                 </span>

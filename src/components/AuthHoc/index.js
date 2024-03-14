@@ -6,7 +6,9 @@ import { useCurrentUser } from "@/utils/usehooks";
 //但是它的作用和高阶组件是一样的，所以我们也把它称为高阶组件；真正的高阶组件的参数应该是直接一个cop
 const AuthHoc = ({ children }) => {
     const user = useCurrentUser();
-    return user?.role === USER_ROLE.ADMIN ? <>{children}</> : null;
+
+    console.log('%c [  ]-170', 'font-size:13px; background:pink; color:#bf2c9f;', user?.USER_ROLE)
+    return user?.data.role === USER_ROLE.ADMIN ? <>{children}</> : null;
 };
 export default AuthHoc;
 //应该是这样写

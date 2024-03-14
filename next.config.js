@@ -22,17 +22,49 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: `/api/:path*`,
+  //       // 启动mock服务，执行这个代码
+  //       // destination: `http://localhost:3001/api/:path*`,
+  //       // 连接本地的nodejs服务，执行这个代码
+  //       destination: `https://mock.apifox.cn/m1/2398938-0-default/api/:path*`,
+  //     },
+  //   ]
+  // },
+  //这个重定向，只是客户端请求的重定向，是解决不了跨域问题的
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: `/api/:path*`,
+  //       destination: 'http://127.0.0.1:3005/api/:path*',
+  //       permanent: false,
+  //     },
+  //   ]
+  // },
+  // 这个重写才是真正的服务端帮你解决跨域问题，重新转发
   async rewrites() {
     return [
+      //接口请求 前缀带上/api-text/
+      // { source: `/api/:path*`, destination: `http://127.0.0.1:3001/api/:path*` },
       {
         source: `/api/:path*`,
-        // 启动mock服务，执行这个代码
-        // destination: `http://localhost:3001/api/:path*`,
-        // 连接本地的nodejs服务，执行这个代码
-        destination: `https://mock.apifox.cn/m1/2398938-0-default/api/:path*`,
+        destination: `http://127.0.0.1:3005/api/:path*`
       },
     ]
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.**',
+      },
+    ],
+  },
+  // images: {
+  //   domains: ['img1.doubanio.com'],
+  // },
 }
 
 module.exports = nextConfig

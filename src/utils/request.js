@@ -19,7 +19,7 @@ export const CreateAxiosInstance = (config) => {
             const user = JSON.parse(localStorage.getItem("user") || "{}");
             //如果本地没有user而且这也不是login中提交的请求的话，就重定向到登录页面
             if (Object.keys(user).length === 0 && config.url !== "/api/login") {
-
+                // localStorage.removeItem("user")
                 console.log('%c [  ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', 2)
                 // return Router.push("/login");
                 Router.push("/login");

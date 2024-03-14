@@ -7,6 +7,7 @@ const UserAdd = () => {
     const router = useRouter();
     const [data, setData] = useState();
 
+    console.log('%c [  ]-10', 'font-size:13px; background:pink; color:#bf2c9f;', router.query.id)
     useEffect(() => {
         (async () => {
             const res = await getUserDetail(router.query.id);

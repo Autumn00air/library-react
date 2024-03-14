@@ -4,12 +4,12 @@ import {
     Button,
     DatePicker,
     Form,
-    Image,
     Input,
     InputNumber,
     Select,
     message,
 } from "antd";
+import Image from "next/image";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import { useRouter } from "next/router";
@@ -71,7 +71,20 @@ const BookForm = ({ title, editData }) => {
     };
 
     const handlePreview = () => {
-        setPreview(form.getFieldValue("cover"));
+        //#todo这里还差一个对图片的事先验证  其实form中是form.item的rules是可以做验证的
+        //甚至包括了regex的验证
+        const inputValue = form.getFieldValue("cover");
+        console.log(inputValue)
+        const regex = /\.doubanio\.com/;
+        const isMatchedByRegex = regex.test(inputValue);
+        console.log(isMatchedByRegex)
+        if (isMatchedByRegex) {
+            setPreview(form.getFieldValue("cover"));
+            console.log("验证成功")
+        } else {
+            setPreview("-");
+        }
+
     };
     //没意义啊，下面这段代码，不在return中是渲染不成jsx的
     // {
@@ -146,6 +159,7 @@ const BookForm = ({ title, editData }) => {
                                     setCover(e.target.value);
                                     form.setFieldValue("cover", e.target.value);
                                 }}
+                                placeholder="请到豆瓣网下https://book.douban.com/top250复制图片链接"
                             />
                             <Button type="primary" onClick={handlePreview}>
                                 预览
@@ -154,7 +168,7 @@ const BookForm = ({ title, editData }) => {
                     </Form.Item>
                     {preview && (
                         <Form.Item label=" " colon={false}>
-                            <Image width={200} height={200} alt="封面" src={preview} />
+                            <Image width={200} height={200} alt="封面" src={preview} onError={(e) => setCover("")} />
                         </Form.Item>
                     )}
                     <Form.Item
