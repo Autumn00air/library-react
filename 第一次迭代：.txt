@@ -1,0 +1,40 @@
+第一次迭代：
+该项目的session验证总结
+前端部分
+根组件的布局部分也就是_app.js有个条件渲染，如果是登录login的转到login，如果是其他，就有个layout布局组件包着整个项目
+这个layout组件内进来有个取本地的localstorage有没有user(localstorage是相互独立的，所以不存在其他网站的user同名冲突)
+如果没有，就是没登录，直接导航到login页面
+如果有，那就是登陆了  然后这个页面之后的所有请求都是通过axios的一个实例B，这个实例B利用请求拦截每次请求都会带上cookie中的sessionid以表示已经登录成功的状态，也就是session了
+
+login页面，单独一个axios实例B，这个请求不能带cookie，以避免带上sessionid造成后端的误会  这个时候，登录成功了，后端会返回一个sessionid自动存在本地，同时也会存下后端返回的data作为本地localstorage的user
+登出的时候，应该是删除本地的localstorage中的user即可   其实还是有csrf的风险，可以多存一个加密的东西在localstorage中，其实这样就不如jwt了
+
+------------------------------------------------
+后端怎么做的呢
+首先进来直接使用session的中间件验证
+如果不是登录页面，同时sessionid中没有user的，就导向login
+如果有的，就下一步
+
+如果是登录，先看数据库中有没有对应密码和账号的，有就将session中的user设置为查询后删除掉密码的user，它会自动返回作为cookie的（中间件），同时，将这个删除密码之后的user作为数据返回让前端存到
+localstorage中
+注意session验证中的这个session是直接存在服务器内存的
+
+注意这里的usehooks中的user没写好，返回的是data，而不是user对象
+Image改用next中的，antd中的加载jpg有问题，png可以  同时添加了Image的来源设置 next.config.js那里
+增加了图片的来源验证
+修改了登录和请求分别走的axios实例，完善了session验证
+=========================================1.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
